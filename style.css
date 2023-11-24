@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+#timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 40vh;
+}
+
+#timer {
+    margin: auto;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+button {
+    width: 70px;
+    height: 30px;
+    text-align: center;
+}
+

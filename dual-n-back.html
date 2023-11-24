@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dual-N-Back</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
+  </head>
+<body>
+    <div class="container">
+        <div id="timer-container">
+            <span id="timer" hx-get="/app/get-time" hx-trigger="every 100ms">00:00:00</span>
+        </div>
+        <div id="button-container">
+            <button id="start" hx-post="/app/start-timer" hx-target="#timer">Start</button>
+            <button id="stop" hx-post="/app/stop-timer">Stop</button>
+        </div>
+    </div>
+</body>
+</html>
