@@ -10,13 +10,34 @@
   </head>
 <body>
     <div class="container">
-        <div id="timer-container">
+
+        <!-- <div id="timer-container">
             <span id="timer" hx-get="/app/get-time" hx-trigger="every 100ms">00:00:00</span>
+        </div> -->
+
+        <div id="grid">
+          <div class="row">
+            <span class="cell top_cell left_cell" id="cell_0">&nbsp;</span>
+            <span class="cell top_cell" id="cell_1">&nbsp;</span>
+            <span class="cell top_cell right_cell" id="cell_2">&nbsp;</span>
+          </div>
+          <div class="row">
+            <span class="cell left_cell" id="cell_3">&nbsp;</span>
+            <span class="cell" id="cell_4">&nbsp;</span>
+            <span class="cell right_cell" id="cell_5">&nbsp;</span>
+          </div>
+          <div class="row">
+            <span class="cell bottom_cell left_cell" id="cell_6">&nbsp;</span>
+            <span class="cell bottom_cell" id="cell_7">&nbsp;</span>
+            <span class="cell bottom_cell right_cell" id="cell_8">&nbsp;</span>
+          </div>
         </div>
+
         <div id="button-container">
             <button id="start" hx-post="/app/start-timer" hx-target="#timer">Start</button>
             <button id="stop" hx-post="/app/stop-timer">Stop</button>
         </div>
+
     </div>
 </body>
 </html>
