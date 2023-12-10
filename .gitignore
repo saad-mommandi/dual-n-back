@@ -4,3 +4,4 @@ flask_app.log
 __pycache__
 .vscode
 *.log
+audio-files/
