@@ -1,26 +1,36 @@
 #container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: 100vh;
 }
 
 h1{
-    width: 90vw;
-    max-width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    flex-basis: 10vh;
+    flex-grow: 0;
+    width: 100vw;
     text-align: center;
+    margin: 0;
+    align-items: center;
 }
 
 #game_board{
     display: flex;
     flex-direction: column;
-    width: 90vw;
-    max-width: 800px;
+    width: 80vw;
+    max-width: 650px;
+    max-height: 650px;
 }
 
 .row{
     display: flex;
     justify-content: center;
+    flex-grow: 1;
 }
 
 .cell{
@@ -28,9 +38,7 @@ h1{
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    width: max-content;
     aspect-ratio: 1 / 1;
-    max-width: 30vh;
 }
 
 .left_cell{
@@ -49,4 +57,16 @@ h1{
     border-top: 2px solid black;
 }
 
+.controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
+    flex-basis: 10vh;
+    flex-grow: 0;
+    width: 100vw;
+    text-align: center;
+    margin: 0;
+    align-items: center;
+    
+}
