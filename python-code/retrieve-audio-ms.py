@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, url_for, request
+from flask import Flask, url_for, request
 import os
 import logging
 import random
@@ -15,7 +15,6 @@ if not app.debug:
 
 @app.route('/get_letter', methods=['GET'])
 def get_letter():
-
     
     dir_path = '/audio-files/'
     file_list = os.listdir(app.static_folder + dir_path)
@@ -25,3 +24,8 @@ def get_letter():
     src = request.url_root.rstrip('/') + url_for('static', filename=f'{dir_path}{audio_file}')
 
     return f'<audio controls autoplay src="{src}" id="audio-player"></audio>'
+
+@app.route('/get_letters', methods=['GET'])
+def get_letters():
+    args = request.args
+    return None

@@ -1,73 +1,51 @@
-.container {
+#container{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    min-height: 100vh; /* Optional: Full viewport height */
-
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: stretch;
-    font-size: 2em;
-
-}
-
-.cell {
-    flex: 1; /*each cell takes equal space */
-    aspect-ratio: 1; /* keep cells square */
-    border: 1px solid #333; /* style as per requirement */
-    display: flex;
-    align-items: center;
     justify-content: center;
-    min-width: 50px; /* Minimum width */
-    min-height: 50px; /* Minimum height */
-} 
-
-.top_cell {
-    border-top: transparent;
+    align-items: center;
 }
 
-.bottom_cell {
-    border-bottom: transparent;
-}
-
-.left_cell {
-    border-left: transparent;
-}
-
-.right_cell {
-    border-right: transparent;
-}
-
-#cell_0 {
-    border-top: transparent;
-
-}
-
-
-#grid {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    max-width: 600px;
-    margin: auto;
-}
-
-#button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 600px;
-    margin: auto;
-    padding: 10px;
-}
-
-button {
-    width: 70px;
-    height: 30px;
+h1{
+    width: 90vw;
+    max-width: 800px;
     text-align: center;
 }
+
+#game_board{
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 800px;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+}
+
+.cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: max-content;
+    aspect-ratio: 1 / 1;
+    max-width: 30vh;
+}
+
+.left_cell{
+    border-right: 2px solid black;
+}
+
+.right_cell{
+    border-left: 2px solid black;
+}
+
+.top_cell{
+    border-bottom: 2px solid black;
+}
+
+.bottom_cell{
+    border-top: 2px solid black;
+}
+

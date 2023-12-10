@@ -1,3 +1,6 @@
 .venv/
 nohup.out
 flask_app.log
+__pycache__
+.vscode
+retrieve-audio-ms.log
