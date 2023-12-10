@@ -4,40 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dual-N-Back</title>
+    <title>HTML 5 Boilerplate</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
-  </head>
+</head>
 <body>
-    <div class="container">
+  <div id="container">
 
-        <!-- <div id="timer-container">
-            <span id="timer" hx-get="/app/get-time" hx-trigger="every 100ms">00:00:00</span>
-        </div> -->
+    <h1>Dual-N-Back</h1>
 
-        <div id="grid">
-          <div class="row">
-            <span class="cell top_cell left_cell" id="cell_0">&nbsp;</span>
-            <span class="cell top_cell" id="cell_1">&nbsp;</span>
-            <span class="cell top_cell right_cell" id="cell_2">&nbsp;</span>
-          </div>
-          <div class="row">
-            <span class="cell left_cell" id="cell_3">&nbsp;</span>
-            <span class="cell" id="cell_4">&nbsp;</span>
-            <span class="cell right_cell" id="cell_5">&nbsp;</span>
-          </div>
-          <div class="row">
-            <span class="cell bottom_cell left_cell" id="cell_6">&nbsp;</span>
-            <span class="cell bottom_cell" id="cell_7">&nbsp;</span>
-            <span class="cell bottom_cell right_cell" id="cell_8">&nbsp;</span>
-          </div>
-        </div>
-
-        <div id="button-container">
-            <button id="start" hx-post="/app/start-timer" hx-target="#timer">Start</button>
-            <button id="stop" hx-post="/app/stop-timer">Stop</button>
-        </div>
+    <div id="game_board">
+      <div class="row">
+        <div class="cell left_cell top_cell" id="cell_0">0</div>
+        <div class="cell top_cell" id="cell_1">1</div>
+        <div class="cell top_cell right_cell" id="cell_2">2</div>
+      </div>
+      <div class="row">
+        <div class="cell left_cell" id="cell_3">3</div>
+        <div class="cell" id="cell_4">4</div>
+        <div class="cell right_cell" id="cell_5">5</div>
+      </div>
+      <div class="row">
+        <div class="cell left_cell bottom_cell" id="cell_6">6</div>
+        <div class="cell bottom_cell" id="cell_7">7</div>
+        <div class="cell bottom_cell right_cell" id="cell_8">8</div>
+      </div>
 
     </div>
+
+
+
+
+  </div>
+<script src="index.js"></script>
 </body>
 </html>
