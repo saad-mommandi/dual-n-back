@@ -4,8 +4,11 @@ Tools: CSS and Javascript. Decided to not use a JS framework as the app is simpl
 Preloading audio: Audio is preloaded as there will be inherent latency if every audio file delivered via an API
 TODO: revisit to explore caching mechanisms or preload from a different location via an API call (maybe a microservice to return all audio from a folder?)
 
+As the application grows, there may be issues w scalability/dependency management/using the global namespace
+TODO: research factoring out the application into modules instead of just files in the global NS
+
 core logic:
-The core application logic is run on the front-end via JS. Backend microservices will be used to store user data, user auth, etc.
+The core application logic is run on the front-end via JS.
 
 
 

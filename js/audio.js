@@ -10,21 +10,8 @@ const start_stop_button = document.getElementById("start-stop");
 
 let audio_elements = audio_files.map(file => new Audio(file));
 let isPlaying = false;
-let intervalId;
 let timeoutIds = []; 
 let currentAudio = null;
-
-
-function button_clicked(){
-    console.log("button clicked");
-
-
-    if (!isPlaying){
-        start_audio();
-    } else {
-        stop_audio();
-    }
-}
 
 function start_audio(){
     console.log("start_audio called");
@@ -51,6 +38,7 @@ function play_random_audio_repeatedly(counter) {
 function play_random_audio(){
     let randomIndex = Math.floor(Math.random() * audio_elements.length);
     let audio = audio_elements[randomIndex];
+    audio_position_tracker(randomIndex);
     audio.play();
     return audio;
 }
@@ -81,6 +69,14 @@ function reset_audio(){
 //event listener
 document.addEventListener("DOMContentLoaded", function() {
     const start_stop_button = document.getElementById("start-stop");
-    start_stop_button.addEventListener("click", button_clicked);
+    start_stop_button.addEventListener("click", () => {
+        console.log("button clicked");
+
+        if (!isPlaying){
+            start_audio();
+        } else {
+            stop_audio();
+        }
+    });
     
 });
