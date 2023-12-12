@@ -65,7 +65,10 @@ function stop_audio(){
 
 
 function reset_audio(){
-    audio_elements.forEach(audio => audio.currentTime=0);
+    audio_elements.forEach(audio => {
+        audio.pause(); 
+        audio.currentTime = 0; 
+    });
 }
 
 
