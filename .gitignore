@@ -1,6 +1,7 @@
+audio-files/
 .venv/
+.vscode/
 nohup.out
 flask_app.log
 __pycache__
-.vscode
 *.log
