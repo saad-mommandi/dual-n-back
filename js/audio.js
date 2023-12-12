@@ -4,7 +4,7 @@
 // "audio-files/r.mp3", "audio-files/s.mp3", "audio-files/t.mp3", "audio-files/u.mp3", "audio-files/v.mp3","audio-files/w.mp3", 
 // "audio-files/x.mp3", "audio-files/y.mp3", "audio-files/z.mp3"];
 
-const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3","audio-files/c.mp3"];
+const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
 const start_stop_button = document.getElementById("start-stop");
 
 
@@ -12,12 +12,15 @@ let audio_elements = audio_files.map(file => new Audio(file));
 let isPlaying = false;
 let timeoutIds = []; 
 let currentAudio = null;
+// TODO: 
+let n_back_level = 1;
 
 function start_audio(){
     console.log("start_audio called");
     isPlaying = true;
     start_stop_button.textContent = "Stop";
-    play_random_audio_repeatedly(3);
+    //TODO: make number of calls customizable
+    play_random_audio_repeatedly(10);
 }
 
 function play_random_audio_repeatedly(counter) {
@@ -57,6 +60,7 @@ function stop_audio(){
     timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
     timeoutIds = [];
     reset_audio();
+    clear_positions();
 }
 
 
@@ -66,11 +70,11 @@ function reset_audio(){
 
 
 
-//event listener
+//event listeners
 document.addEventListener("DOMContentLoaded", function() {
     const start_stop_button = document.getElementById("start-stop");
     start_stop_button.addEventListener("click", () => {
-        console.log("button clicked");
+        console.log("start/stop button clicked");
 
         if (!isPlaying){
             start_audio();
@@ -80,3 +84,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const start_stop_button = document.getElementById("audio-match");
+    start_stop_button.addEventListener("click", () => {
+        console.log("audio match button clicked");
+
+
+    });
+    
+});
+
