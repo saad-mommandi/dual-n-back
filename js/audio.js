@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     const start_stop_button = document.getElementById("audio-match");
     start_stop_button.addEventListener("click", () => {
-        console.log("audio match button clicked");
 
+        check_audio_hit(n_back_level);
 
     });
     
