@@ -41,6 +41,13 @@ h1{
     aspect-ratio: 1 / 1;
 }
 
+.visual-cue{
+    width: 90%;
+    aspect-ratio: 1/1 ;
+    background-color: rgb(74, 67, 216);
+    border-radius: 25px;
+}
+
 .left_cell{
     border-right: 2px solid black;
 }
