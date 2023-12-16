@@ -2,6 +2,8 @@ import { get_is_playing, set_is_playing, n_back_level} from "./state-manager.js"
 import {start_trial, stop_trial} from "./audio.js";
 import { check_audio_hit, check_visual_hit } from "./n-back.js";
 
+const start_stop_button = document.getElementById("start-stop");
+
 function add_start_stop_listener(){
     document.addEventListener("DOMContentLoaded", function() {
         const start_stop_button = document.getElementById("start-stop");
@@ -10,8 +12,10 @@ function add_start_stop_listener(){
     
             if (!get_is_playing()){
                 start_trial();
+                start_stop_button.textContent = "Stop";
             } else {
                 stop_trial();
+                start_stop_button.textContent = "Start";
             }
         });
         

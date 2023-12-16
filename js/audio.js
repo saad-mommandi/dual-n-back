@@ -1,14 +1,7 @@
-// const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3", "audio-files/c.mp3", "audio-files/d.mp3", "audio-files/e.mp3", 
-// "audio-files/f.mp3", "audio-files/g.mp3", "audio-files/h.mp3", "audio-files/i.mp3", "audio-files/j.mp3", "audio-files/k.mp3", 
-// "audio-files/l.mp3", "audio-files/m.mp3", "audio-files/n.mp3", "audio-files/o.mp3", "audio-files/p.mp3", "audio-files/q.mp3", 
-// "audio-files/r.mp3", "audio-files/s.mp3", "audio-files/t.mp3", "audio-files/u.mp3", "audio-files/v.mp3","audio-files/w.mp3", 
-// "audio-files/x.mp3", "audio-files/y.mp3", "audio-files/z.mp3"];
-
 import { get_is_playing,set_is_playing,audio_files } from './state-manager.js';
 import { audio_position_tracker, visual_position_tracker, clear_positions} from './n-back.js';
 
-//export const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
-const start_stop_button = document.getElementById("start-stop");
+//const start_stop_button = document.getElementById("start-stop");
 
 
 let audio_elements = audio_files.map(file => new Audio(file));
@@ -61,7 +54,7 @@ function start_audio(){
 
     //TODO: factor out as these are application flag related and not "start_audio() related"
     set_is_playing(true);
-    start_stop_button.textContent = "Stop";
+  //  start_stop_button.textContent = "Stop";
     //-----
     play_random_audio_repeatedly(num_trials);
 }
@@ -94,7 +87,7 @@ function stop_audio(){
     console.log("stop_audio called");
     //TODO: flag related - factor out 
     set_is_playing(false);
-    start_stop_button.textContent = "Start";
+    //start_stop_button.textContent = "Start";
     //---------------------------------------------
     if (currentAudio) {
         currentAudio.pause();
