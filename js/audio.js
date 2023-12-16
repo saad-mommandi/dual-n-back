@@ -4,6 +4,8 @@
 // "audio-files/r.mp3", "audio-files/s.mp3", "audio-files/t.mp3", "audio-files/u.mp3", "audio-files/v.mp3","audio-files/w.mp3", 
 // "audio-files/x.mp3", "audio-files/y.mp3", "audio-files/z.mp3"];
 
+import {add_start_stop_listener, add_audio_cue_listener, add_visual_cue_listener} from '.event_listeners.js'
+
 const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
 const start_stop_button = document.getElementById("start-stop");
 
