@@ -14,13 +14,54 @@ let timeoutIds = [];
 let currentAudio = null;
 // TODO: 
 let n_back_level = 1;
+let num_trials = 5;
+
+function start_trial(){
+    start_audio();
+    start_visual();
+}
+
+function stop_trial(){
+    stop_audio();
+    stop_visual();
+}
+
+function start_visual(){
+    console.log("start_visual called");
+    play_random_visual_repeatedly(num_trials);
+
+}
+
+function play_random_visual_repeatedly(counter){
+    if (counter > 0 && isPlaying) {
+        play_random_visual();
+        setTimeout(() => play_random_visual_repeatedly(counter - 1), 2500);  
+    } else {
+        stop_visual();
+    }
+}
+
+function play_random_visual(){
+    let randomIndex = Math.floor(Math.random() * 2);
+    console.log('random visual index: ' + randomIndex);
+    visual_position_tracker(randomIndex);
+    grid_position =  document.getElementById('cell_' + randomIndex).firstElementChild;
+    grid_position.style.backgroundColor = "blue";
+    setTimeout(() => {grid_position.style.backgroundColor = "white";} ,2000);    
+}
+
+function stop_visual(){
+    console.log("stop_visual called");
+}
 
 function start_audio(){
     console.log("start_audio called");
+
+    //TODO: factor out as these are application flag related and not "start_audio() related"
     isPlaying = true;
     start_stop_button.textContent = "Stop";
-    //TODO: make number of calls customizable
-    play_random_audio_repeatedly(10);
+    //-----
+    play_random_audio_repeatedly(num_trials);
 }
 
 function play_random_audio_repeatedly(counter) {
@@ -34,7 +75,7 @@ function play_random_audio_repeatedly(counter) {
         let timeoutId = setTimeout(() => play_random_audio_repeatedly(counter - 1), 2500);
         timeoutIds.push(timeoutId);    
     } else {
-        stop_audio(); 
+        stop_trial(); 
     }
 }
 
@@ -49,9 +90,10 @@ function play_random_audio(){
 
 function stop_audio(){
     console.log("stop_audio called");
+    //TODO: flag related - factor out 
     isPlaying = false;
     start_stop_button.textContent = "Start";
-
+    //---------------------------------------------
     if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
@@ -65,7 +107,10 @@ function stop_audio(){
 
 
 function reset_audio(){
-    audio_elements.forEach(audio => audio.currentTime=0);
+    audio_elements.forEach(audio => {
+        audio.pause(); 
+        audio.currentTime = 0; 
+    });
 }
 
 
@@ -77,9 +122,9 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("start/stop button clicked");
 
         if (!isPlaying){
-            start_audio();
+            start_trial();
         } else {
-            stop_audio();
+            stop_trial();
         }
     });
     
@@ -88,10 +133,19 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     const start_stop_button = document.getElementById("audio-match");
     start_stop_button.addEventListener("click", () => {
-        console.log("audio match button clicked");
 
+        check_audio_hit(n_back_level);
 
     });
     
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const start_stop_button = document.getElementById("visual-match");
+    start_stop_button.addEventListener("click", () => {
+
+        check_visual_hit(n_back_level);
+
+    });
+    
+});

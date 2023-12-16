@@ -41,6 +41,13 @@ h1{
     aspect-ratio: 1 / 1;
 }
 
+.visual-cue{
+    width: 90%;
+    aspect-ratio: 1/1 ;
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+}
+
 .left_cell{
     border-right: 2px solid black;
 }
@@ -60,7 +67,7 @@ h1{
 .controls{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content:space-evenly;
 
     flex-basis: 10vh;
     flex-grow: 0;
