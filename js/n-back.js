@@ -1,3 +1,5 @@
+import {audio_files} from "./audio.js";
+
 //Tracks the recently spoken letters
 let audio_position = [];
 let visual_position = [];
@@ -129,3 +131,5 @@ function score_keeper(){
     };
     
 }
+
+export {audio_position_tracker}

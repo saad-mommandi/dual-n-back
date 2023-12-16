@@ -4,14 +4,15 @@
 // "audio-files/r.mp3", "audio-files/s.mp3", "audio-files/t.mp3", "audio-files/u.mp3", "audio-files/v.mp3","audio-files/w.mp3", 
 // "audio-files/x.mp3", "audio-files/y.mp3", "audio-files/z.mp3"];
 
-import {add_start_stop_listener, add_audio_cue_listener, add_visual_cue_listener} from '.event_listeners.js'
+import {add_start_stop_listener, add_audio_cue_listener, add_visual_cue_listener} from './event-listeners.js';
+import { get_is_playing,set_is_playing } from './state-manager.js';
+import { audio_position_tracker } from './n-back.js';
 
-const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
+export const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
 const start_stop_button = document.getElementById("start-stop");
 
 
 let audio_elements = audio_files.map(file => new Audio(file));
-let isPlaying = false;
 let timeoutIds = []; 
 let currentAudio = null;
 // TODO: 
@@ -35,7 +36,7 @@ function start_visual(){
 }
 
 function play_random_visual_repeatedly(counter){
-    if (counter > 0 && isPlaying) {
+    if (counter > 0 && get_is_playing()) {
         play_random_visual();
         setTimeout(() => play_random_visual_repeatedly(counter - 1), 2500);  
     } else {
@@ -60,14 +61,14 @@ function start_audio(){
     console.log("start_audio called");
 
     //TODO: factor out as these are application flag related and not "start_audio() related"
-    isPlaying = true;
+    set_is_playing(true);
     start_stop_button.textContent = "Stop";
     //-----
     play_random_audio_repeatedly(num_trials);
 }
 
 function play_random_audio_repeatedly(counter) {
-    if (counter > 0 && isPlaying) { 
+    if (counter > 0 && get_is_playing()) { 
         console.log(counter);
         if (currentAudio) {
             currentAudio.pause();
@@ -93,7 +94,7 @@ function play_random_audio(){
 function stop_audio(){
     console.log("stop_audio called");
     //TODO: flag related - factor out 
-    isPlaying = false;
+    set_is_playing(false);
     start_stop_button.textContent = "Start";
     //---------------------------------------------
     if (currentAudio) {
@@ -115,39 +116,8 @@ function reset_audio(){
     });
 }
 
+add_start_stop_listener();
+add_audio_cue_listener();
+add_visual_cue_listener();
 
-
-//event listeners
-document.addEventListener("DOMContentLoaded", function() {
-    const start_stop_button = document.getElementById("start-stop");
-    start_stop_button.addEventListener("click", () => {
-        console.log("start/stop button clicked");
-
-        if (!isPlaying){
-            start_trial();
-        } else {
-            stop_trial();
-        }
-    });
-    
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const start_stop_button = document.getElementById("audio-match");
-    start_stop_button.addEventListener("click", () => {
-
-        check_audio_hit(n_back_level);
-
-    });
-    
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const start_stop_button = document.getElementById("visual-match");
-    start_stop_button.addEventListener("click", () => {
-
-        check_visual_hit(n_back_level);
-
-    });
-    
-});
+export {start_trial, stop_trial};
