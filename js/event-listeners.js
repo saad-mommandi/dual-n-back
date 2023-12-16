@@ -1,5 +1,6 @@
-import { get_is_playing, set_is_playing } from "./state-manager.js";
+import { get_is_playing, set_is_playing, n_back_level} from "./state-manager.js";
 import {start_trial, stop_trial} from "./audio.js";
+import { check_audio_hit, check_visual_hit } from "./n-back.js";
 
 function add_start_stop_listener(){
     document.addEventListener("DOMContentLoaded", function() {

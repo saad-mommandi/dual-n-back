@@ -4,11 +4,10 @@
 // "audio-files/r.mp3", "audio-files/s.mp3", "audio-files/t.mp3", "audio-files/u.mp3", "audio-files/v.mp3","audio-files/w.mp3", 
 // "audio-files/x.mp3", "audio-files/y.mp3", "audio-files/z.mp3"];
 
-import {add_start_stop_listener, add_audio_cue_listener, add_visual_cue_listener} from './event-listeners.js';
-import { get_is_playing,set_is_playing } from './state-manager.js';
-import { audio_position_tracker } from './n-back.js';
+import { get_is_playing,set_is_playing,audio_files } from './state-manager.js';
+import { audio_position_tracker, visual_position_tracker, clear_positions} from './n-back.js';
 
-export const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
+//export const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
 const start_stop_button = document.getElementById("start-stop");
 
 
@@ -48,7 +47,7 @@ function play_random_visual(){
     let randomIndex = Math.floor(Math.random() * 2);
     console.log('random visual index: ' + randomIndex);
     visual_position_tracker(randomIndex);
-    grid_position =  document.getElementById('cell_' + randomIndex).firstElementChild;
+    let grid_position =  document.getElementById('cell_' + randomIndex).firstElementChild;
     grid_position.style.backgroundColor = "blue";
     setTimeout(() => {grid_position.style.backgroundColor = "white";} ,2000);    
 }
@@ -116,8 +115,5 @@ function reset_audio(){
     });
 }
 
-add_start_stop_listener();
-add_audio_cue_listener();
-add_visual_cue_listener();
 
 export {start_trial, stop_trial};

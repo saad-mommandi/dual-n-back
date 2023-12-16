@@ -1,4 +1,4 @@
-import {audio_files} from "./audio.js";
+import {n_back_level} from "./state-manager.js";
 
 //Tracks the recently spoken letters
 let audio_position = [];
@@ -6,7 +6,7 @@ let visual_position = [];
 let sk = score_keeper();
 //array to store results from the scorekeeper after the trial is complete
 let sk_scorecard;
-
+const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
 const characters = audio_files.map(file => {
     return file.split('/')[1].charAt(0);
 })
@@ -132,4 +132,4 @@ function score_keeper(){
     
 }
 
-export {audio_position_tracker}
+export {audio_position_tracker, visual_position_tracker, clear_positions, check_audio_hit, check_visual_hit}
