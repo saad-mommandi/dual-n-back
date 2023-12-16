@@ -75,7 +75,7 @@ function play_random_audio_repeatedly(counter) {
         let timeoutId = setTimeout(() => play_random_audio_repeatedly(counter - 1), 2500);
         timeoutIds.push(timeoutId);    
     } else {
-        stop_audio(); 
+        stop_trial(); 
     }
 }
 
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const start_stop_button = document.getElementById("audio-match");
+    const start_stop_button = document.getElementById("visual-match");
     start_stop_button.addEventListener("click", () => {
 
         check_visual_hit(n_back_level);
