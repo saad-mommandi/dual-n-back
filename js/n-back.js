@@ -43,7 +43,7 @@ function clear_positions(){
     console.log('Visual Hits: ' + sk_scorecard[5]);
     console.log('Visual Misses: ' + sk_scorecard[6]);
 
-    // reset scoprekeeper
+    // reset scorekeeper
     sk = score_keeper();
 
 }
@@ -133,3 +133,4 @@ function score_keeper(){
 }
 
 export {audio_position_tracker, visual_position_tracker, clear_positions, check_audio_hit, check_visual_hit}
+export {audio_position}

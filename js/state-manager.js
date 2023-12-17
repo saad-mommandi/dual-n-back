@@ -7,6 +7,10 @@
 let isPlaying = false;
 let n_back_level = 1;
 let audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
+let num_trials = 3;
+let audio_elements = audio_files.map(file => new Audio(file));
+let timeout_ids = [];
+
 
 
 function get_is_playing(){
@@ -17,4 +21,18 @@ function set_is_playing(bool){
     isPlaying = bool;
 }
 
-export {get_is_playing, set_is_playing, n_back_level, audio_files};
+function reset_timeout_ids(){
+    timeout_ids = [];
+}
+
+function get_timeout_ids(){
+    return timeout_ids;
+}
+
+function add_timeout_id(timeout_id){
+    timeout_ids.push(timeout_id)
+}
+
+
+export {get_is_playing, set_is_playing, reset_timeout_ids, get_timeout_ids, add_timeout_id,
+    n_back_level, audio_files, num_trials, audio_elements };
