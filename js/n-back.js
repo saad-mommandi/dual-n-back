@@ -1,10 +1,12 @@
+import {n_back_level} from "./state-manager.js";
+
 //Tracks the recently spoken letters
 let audio_position = [];
 let visual_position = [];
 let sk = score_keeper();
 //array to store results from the scorekeeper after the trial is complete
 let sk_scorecard;
-
+const audio_files = ["audio-files/a.mp3", "audio-files/b.mp3"];
 const characters = audio_files.map(file => {
     return file.split('/')[1].charAt(0);
 })
@@ -41,7 +43,7 @@ function clear_positions(){
     console.log('Visual Hits: ' + sk_scorecard[5]);
     console.log('Visual Misses: ' + sk_scorecard[6]);
 
-    // reset scoprekeeper
+    // reset scorekeeper
     sk = score_keeper();
 
 }
@@ -129,3 +131,6 @@ function score_keeper(){
     };
     
 }
+
+export {audio_position_tracker, visual_position_tracker, clear_positions, check_audio_hit, check_visual_hit}
+export {audio_position}

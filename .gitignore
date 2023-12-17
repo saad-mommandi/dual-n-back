@@ -5,3 +5,4 @@ nohup.out
 flask_app.log
 __pycache__
 *.log
+node_modules/
