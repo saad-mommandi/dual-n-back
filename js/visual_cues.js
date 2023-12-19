@@ -22,8 +22,8 @@ function play_random_visual(){
     console.log('random visual index: ' + randomIndex);
     visual_position_tracker(randomIndex);
     let grid_position =  document.getElementById('cell_' + randomIndex).firstElementChild;
-    grid_position.style.backgroundColor = "blue";
-    setTimeout(() => {grid_position.style.backgroundColor = "white";} ,2000);    
+    grid_position.style.backgroundColor = "#3a5a40";
+    setTimeout(() => {grid_position.style.backgroundColor = "#dad7cd";} ,2000);    
 }
 
 function stop_visual(){

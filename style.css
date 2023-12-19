@@ -1,31 +1,73 @@
-#container{
+/* Colors 
+E3E3D4
+9F9EA3
+E69F3F
+E43622
+283445
+*/
+
+body, #container{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    max-height: 99vh;
+
+    background-color: #E3E3D4; /* Light grey background */
+    color: #E3E3D4; /* Ocean blue text color */
+    font-family: 'Arial', sans-serif; /* Optional: modern font */
 }
 
-h1{
+.menu-bar{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    text-align: center;
 
     flex-basis: 10vh;
-    flex-grow: 0;
     width: 100vw;
-    text-align: center;
-    margin: 0;
     align-items: center;
+
+    background-color: #283445;
+    color: #E69F3F; /* Ocean blue for header text */
 }
 
+
+h1{
+    
+    display: flex;
+    flex-grow: 0;
+
+    background-color: #283445;
+    color: #E69F3F; /* Ocean blue for header text */
+
+    justify-content: flex-start;
+    margin-left: 10px;
+    
+
+}
+
+
+#button-container {
+    flex-grow: 1;
+    display: flex; /* Use Flexbox for the buttons */
+    justify-content: flex-end; /* Align buttons to the end (right) */
+}
+
+.menu-buttons{
+        margin-right: 10px; /* Add space between the buttons */
+}
 #game_board{
     display: flex;
     flex-direction: column;
     width: 80vw;
-    max-width: 650px;
-    max-height: 650px;
+    max-width: 600px;
+    max-height: 600px;
+
+    background-color: #dad7cd; /* White background for the game board */
+    border: 2px solid #283445; /* Ocean blue border for the game board */
 }
+
 
 .row{
     display: flex;
@@ -39,13 +81,17 @@ h1{
     align-items: center;
     flex-grow: 1;
     aspect-ratio: 1 / 1;
+
+
 }
 
 .visual-cue{
     width: 90%;
     aspect-ratio: 1/1 ;
-    background-color: rgb(255, 255, 255);
+    background-color: #dad7cd;
     border-radius: 25px;
+
+
 }
 
 .left_cell{
@@ -76,4 +122,20 @@ h1{
     margin: 0;
     align-items: center;
     
+}
+
+button {
+    background-color: #E69F3F; /* Ocean blue background for buttons */
+    color: #283445; /* White text for buttons */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #E43622; /* Darker shade of blue for hover */
 }
