@@ -1,11 +1,12 @@
 <script setup>
-import { ref, onBeforeUnmount } from 'vue';
+import { ref, onBeforeUnmount, onMounted } from 'vue';
 import logo from '@/assets/img/logo.jfif';
 
 // Create a 3x3 grid initialized to false (no images shown)
 const grid = ref(Array(9).fill(false));
 let intervalId = null;
-const maxRuns = 5;  // Maximum number of times the interval should run
+const maxRuns = 19;  // Maximum number of times the interval should run
+const numOfTrials = ref(20);
 const runCount = ref(0);  // Counter to track the number of runs
 const matchBack = ref(1);  // Number of positions back to check for a match, default is 1 (last position)
 const history = ref([]); // Array to store the history of grid positions and letters spoken
@@ -32,6 +33,13 @@ function playRandomLetterSound() {
   const letterObj = letterSounds[randomIndex];
   letterObj.sound.play();
   return letterObj.letter;
+}
+
+function resetAudio() {
+  letterSounds.forEach(letterObj => {
+    letterObj.sound.pause();
+    letterObj.sound.currentTime = 0;  // Reset audio to the start
+  });
 }
 
 function playRandomImage(){
@@ -101,7 +109,7 @@ function trialRun() {
   runCount.value++;
 
   //Handle the final run differently
-  if (runCount.value >= maxRuns) {
+  if (runCount.value >= numOfTrials.value) {
      setTimeout(() => {
       clearGrid();
      }, 2400);
@@ -109,8 +117,6 @@ function trialRun() {
 
 
 }
-
-
 
 // Function to start the interval
 function startInterval() {
@@ -120,6 +126,7 @@ function startInterval() {
     runCount.value = 0;  // Reset the run count
     userResults.value = [];
     isRunning.value = true;
+    resetAudio();
     trialRun();
     intervalId = setInterval(trialRun, 2500);
   }
@@ -166,35 +173,126 @@ function checkResults() {
 }
 
 
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
 // Clear the interval when the component is destroyed
 onBeforeUnmount(() => {
   clearInterval(intervalId);
+  window.removeEventListener('keydown', handleKeydown);
 });
 
-</script>
+function handleKeydown(event) {
+  if (event.key === 'f') {
+    matchPosition();
+  } else if (event.key === 'j') {
+    matchSound();
+  }
+}
 
+</script>
 <template>
-  <div :class="{'bg-yellow-300': isMatch}" class="flex flex-col justify-center items-center h-screen transition-colors duration-300">
-    <div class="grid grid-cols-3 gap-2 w-72 h-72 mb-4">
-      <div 
-        v-for="(isVisible, index) in grid" 
-        :key="index" 
-        class="border flex justify-center items-center w-24 h-24"
-      >
-        <img v-if="isVisible" :src="logo" alt="Logo" class="w-16 h-16"/>
+  <div class="flex h-screen bg-slate-500 text-gray-50 transition-colors duration-150">
+    
+    <!-- Left Column (empty) -->
+    <div class="flex-1">
+      <!-- Left column is intentionally left empty -->
+    </div>
+
+    <!-- Middle Column (Grid + Controls) -->
+    <div class="flex-1 flex flex-col justify-center items-center">
+      <!-- Grid Layout -->
+      <div class="grid grid-cols-3 gap-0 w-96 h-96 mb-4">
+        <div 
+          v-for="(isVisible, index) in grid" 
+          :key="index" 
+          class="border rounded flex justify-center items-center w-32 h-32 border-gray-400 bg-gray-100"
+        >
+          <img v-if="isVisible" :src="logo" alt="Logo" class="w-16 h-16 transition-opacity duration-300 transform"/>
+        </div>
+      </div>
+
+      <!-- Input Fields (N-Back and Number of Trials) -->
+      <div class="mb-4">
+        <label for="matchBack" class="mr-2">N-Back Level:</label>
+        <input 
+          id="matchBack" 
+          type="number" 
+          min="1" 
+          max="9" 
+          v-model="matchBack"  
+          :disabled="isRunning" 
+          class="mr-4 px-2 py-1 border rounded w-16 text-center bg-gray-100 text-gray-800 border-gray-400"
+        />
+    
+        <label for="numOfTrials" class="mr-2">Number of trials:</label>
+        <input 
+          id="numOfTrials" 
+          type="number" 
+          min="1" 
+          max="9" 
+          v-model="numOfTrials"  
+          :disabled="isRunning" 
+          class="px-2 py-1 border rounded w-16 text-center bg-gray-100 text-gray-800 border-gray-400"
+        />
+      </div>
+
+      <!-- Start and Clear Buttons -->
+      <div class="mb-8">
+        <button 
+          @click="startInterval" 
+          v-bind:class="[
+            'px-4 py-2 bg-green-600 text-white rounded mr-2',
+            isRunning ? 'hidden' : 'active:scale-95'
+          ]">
+          START
+        </button>
+        <button 
+          @click="clearGrid"  
+          v-bind:class="[
+            'px-4 py-2 bg-red-600 text-white rounded',
+            isRunning ? 'active:scale-95' : 'hidden'
+          ]">
+          CLEAR
+        </button>
+      </div>
+
+      <!-- Position and Sound Buttons -->
+      <div>
+        <button 
+          @click="matchPosition" 
+          v-bind:disabled="!isRunning" 
+          :class="[
+            'px-4 py-2 rounded mr-2 w-36', 
+            isRunning ? 'bg-blue-600 text-white active:scale-95 active:bg-blue-700' : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+          ]"
+        >
+          POSITION
+        </button>
+
+        <button 
+          @click="matchSound" 
+          v-bind:disabled="!isRunning" 
+          :class="[
+            'px-4 py-2 rounded mr-2 w-36', 
+            isRunning ? 'bg-blue-600 text-white active:scale-95 active:bg-blue-700' : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+          ]"
+        >
+          SOUND
+        </button>
       </div>
     </div>
-    <div class="mb-4">
-      <label for="matchBack" class="mr-2">Check Match Back:</label>
-      <input id="matchBack" type="number" min="1" max="9" v-model="matchBack"  :disabled="isRunning" class="px-2 py-1 border rounded w-16 text-center"/>
+
+    <!-- Right Column (Text List) -->
+    <div class="flex-1 flex flex-col justify-center items-center">
+      <ul class="list-disc text-left">
+        <li>First Item</li>
+        <li>Second Item</li>
+        <li>Third Item</li>
+        <li>Fourth Item</li>
+      </ul>
     </div>
-    <div>
-      <button @click="matchPosition" class="px-4 py-2 bg-blue-500 text-white rounded mr-2">POSITION</button>
-      <button @click="matchSound" class="px-4 py-2 bg-blue-500 text-white rounded">SOUND</button>
-    </div>
-    <div>
-      <button @click="startInterval" class="px-4 py-2 bg-green-500 text-white rounded mr-2">START</button>
-      <button @click="clearGrid" class="px-4 py-2 bg-red-500 text-white rounded">CLEAR</button>
-    </div>
+
   </div>
 </template>
